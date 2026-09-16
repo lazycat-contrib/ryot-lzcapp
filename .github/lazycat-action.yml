@@ -28,14 +28,16 @@ images:
     tag_regex: '^v\d+\.\d+\.\d+$'
     delivery:
       mode: lazycat
-  # 数据库镜像：固定 16-alpine 家族，仅自动跟进补丁
+  # 数据库镜像：固定 16-alpine 家族（tag 带后缀，custom 通道映射为 SemVer）
   - id: ryot-db
     target: service
     service: ryot-db
     source: library/postgres
-    channel: stable
+    channel: custom
     sort: semver
-    tag_regex: '^16(\.\d+)?-alpine$'
+    tag_regex: '^16\.\d+-alpine$'
+    version_regex: '^16\.(?P<minor>\d+)-alpine$'
+    version_template: '16.{minor}.0'
     delivery:
       mode: lazycat
 
