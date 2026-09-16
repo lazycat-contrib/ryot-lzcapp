@@ -9,3 +9,6 @@ locales:
   zh:
     description: "一个用于追踪生活各方面的自托管平台"
     name: Ryot
+  en:
+    description: "A self-hosted platform to track various aspects of your life"
+    name: Ryot
