@@ -1,0 +1,11 @@
+package: cloud.lazycat.app.ryot
+version: 10.5.0
+name: Ryot
+description: "一个用于追踪生活各方面的自托管平台"
+min_os_version: "1.5.0"
+homepage: https://ryot.io
+author: ryot
+locales:
+  zh:
+    description: "一个用于追踪生活各方面的自托管平台"
+    name: Ryot

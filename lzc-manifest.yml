@@ -1,0 +1,36 @@
+application:
+  subdomain: ryot
+  background_task: true
+  multi_instance: false
+  public_path:
+    - /
+  upstreams:
+    - location: /
+      backend: http://ryot:8000/
+
+services:
+  ryot-db:
+    # upstream: library/postgres:16-alpine
+    image: postgres:16-alpine
+    environment:
+      - TZ=Asia/Shanghai
+      - POSTGRES_DB=postgres
+      - POSTGRES_USER=postgres
+      - POSTGRES_PASSWORD={{ stable_secret "db_password" }}
+    binds:
+      - /lzcapp/var/data:/var/lib/postgresql/data
+    healthcheck:
+      test:
+        - CMD-SHELL
+        - pg_isready -U postgres
+      start_period: 60s
+
+  ryot:
+    # upstream: ignisda/ryot:v10.5.0
+    image: ignisda/ryot:v10.5.0
+    environment:
+      - TZ=Asia/Shanghai
+      - SERVER_ADMIN_ACCESS_TOKEN={{ stable_secret "admin_access_token" }}
+      - DATABASE_URL=postgres://postgres:{{ stable_secret "db_password" }}@ryot-db:5432/postgres
+    depends_on:
+      - ryot-db
