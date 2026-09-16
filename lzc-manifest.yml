@@ -7,11 +7,10 @@ application:
   upstreams:
     - location: /
       backend: http://ryot:8000/
-
 services:
   ryot-db:
-    # upstream: library/postgres:16-alpine
-    image: postgres:16-alpine
+    # upstream: library/postgres:16.15-alpine
+    image: registry.lazycat.cloud/czyt/library/postgres:aa0ae8e7056ea3ea
     environment:
       - TZ=Asia/Shanghai
       - POSTGRES_DB=postgres
@@ -24,10 +23,9 @@ services:
         - CMD-SHELL
         - pg_isready -U postgres
       start_period: 60s
-
   ryot:
     # upstream: ignisda/ryot:v10.5.0
-    image: ignisda/ryot:v10.5.0
+    image: registry.lazycat.cloud/czyt/ignisda/ryot:845489b9c981d06a
     environment:
       - TZ=Asia/Shanghai
       - SERVER_ADMIN_ACCESS_TOKEN={{ stable_secret "admin_access_token" }}
