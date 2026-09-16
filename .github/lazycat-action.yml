@@ -36,8 +36,8 @@ images:
     channel: custom
     sort: semver
     tag_regex: '^16\.\d+-alpine$'
-    version_regex: '^16\.(?P<minor>\d+)-alpine$'
-    version_template: '16.{minor}.0'
+    version_regex: '^(?P<version>16\.\d+)-alpine$'
+    version_template: '{version}.0'
     delivery:
       mode: lazycat
 
