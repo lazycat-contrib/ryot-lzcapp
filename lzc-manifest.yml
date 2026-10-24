@@ -24,8 +24,8 @@ services:
         - pg_isready -U postgres
       start_period: 60s
   ryot:
-    # upstream: ignisda/ryot:v10.5.3
-    image: registry.lazycat.cloud/czyt/ignisda/ryot:1bd0a9a63cbcd3d6
+    # upstream: ignisda/ryot:v10.5.4
+    image: registry.lazycat.cloud/czyt/ignisda/ryot:92c27e32a2794f52
     environment:
       - TZ=Asia/Shanghai
       - SERVER_ADMIN_ACCESS_TOKEN={{ stable_secret "admin_access_token" }}
